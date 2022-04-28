@@ -1,4 +1,4 @@
-import { Alert } from 'react-bootstrap'
+import Alert from 'react-bootstrap/Alert'
 
 const AlertBanner = ({ message, variant }) => {
   const alertMessage =

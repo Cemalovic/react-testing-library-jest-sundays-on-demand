@@ -4,8 +4,16 @@ import Form from 'react-bootstrap/Form'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
 
-const SummaryForm = () => {
+const SummaryForm = ({ setOrderPhase }) => {
   const [checked, setChecked] = useState(false)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    // pass along to the next phase
+    // The next page will handle submitting order from context
+    setOrderPhase('completed')
+  }
 
   const onCheckbox = (e) => {
     setChecked(e.target.checked)
@@ -27,7 +35,7 @@ const SummaryForm = () => {
   )
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group controlId='terms-and-conditions'>
         <Form.Check
           type='checkbox'

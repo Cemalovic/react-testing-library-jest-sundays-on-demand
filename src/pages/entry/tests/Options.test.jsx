@@ -1,4 +1,5 @@
 // import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { render, screen } from '../../../test-utils/testing-library-utils'
 import Options from '../Options'
 
@@ -29,4 +30,19 @@ test('should display image for every topping from server', async () => {
     'M&Ms topping',
     'Hot fudge topping'
   ])
+})
+
+test('should not update total if scoops input is invalid', async () => {
+  render(<Options optionType='scoops' />)
+
+  // expect button to be enabled after adding scoop
+  const vanillaInput = await screen.findByRole('spinbutton', {
+    name: /vanilla/i
+  })
+  userEvent.clear(vanillaInput)
+  userEvent.type(vanillaInput, '-1')
+
+  // make sure scoops subtotal hasn't updated
+  const scoopsSubtotal = screen.getByText('Scoops total: $0.00')
+  expect(scoopsSubtotal).toBeInTheDocument()
 })

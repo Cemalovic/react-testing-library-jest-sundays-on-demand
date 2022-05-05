@@ -39,14 +39,14 @@ test('should order phases for happy path', async () => {
   expect(toppingsHeading).toBeInTheDocument()
 
   // check summary option items
-  expect(screen.getByText('1 Vanilla')).toBeInTheDocument()
-  expect(screen.getByText('2 Chocolate')).toBeInTheDocument()
-  expect(screen.getByText('Cherries')).toBeInTheDocument()
+  expect(screen.getByText(/1 vanilla/i)).toBeInTheDocument()
+  expect(screen.getByText(/2 chocolate/i)).toBeInTheDocument()
+  expect(screen.getByText(/cherries/i)).toBeInTheDocument()
 
   // ili moze i ovako
   // const optionItems = screen.getAllByRole('listitem')
-  // const optionItemsText = optionItems.map(item => item.textContent)
-  // expect(optionItemsText).toEqual(['1 Vanilla', '2 Chocolate', 'Cherries'])
+  // const optionItemsText = optionItems.map((item) => item.textContent)
+  // expect(optionItemsText).toEqual(['1 Vanilla', '2 Chocolate', 'Cherries1'])
 
   // accept 'terms and conditions' and click button to confirm order
   const checkbox = screen.getByRole('checkbox', {

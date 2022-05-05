@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import Button from 'react-bootstrap/Button'
 import axios from 'axios'
+import Button from 'react-bootstrap/Button'
 import { useOrderDetails } from '../../contexts/OrderDetails'
+import AlertBanner from '../common/AlertBanner'
 
 const OrderConfirmation = ({ setOrderPhase }) => {
   const [, , resetOrder] = useOrderDetails()
   const [orderNumber, setOrderNumber] = useState(null)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     // in real app we would get order details from context and send with POST
@@ -14,10 +16,12 @@ const OrderConfirmation = ({ setOrderPhase }) => {
       .then((response) => {
         setOrderNumber(response.data.orderNumber)
       })
-      .catch((error) => {
-        // TODO: handle error
-      })
+      .catch((error) => setError(true))
   }, [])
+
+  if (error) {
+    return <AlertBanner message={null} variant={null} />
+  }
 
   const handleClick = () => {
     // clear the order details
